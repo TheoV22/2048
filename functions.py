@@ -44,6 +44,7 @@ def addRandomToGrid(starting_grid):
                 break
         
     print('Ending grid: \n', starting_grid)
+    
     return starting_grid
 
 

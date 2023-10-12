@@ -9,33 +9,39 @@ while True:
     direction = input('Which direction to move ? Select between U, D, L, R \n')
 
     if direction == 'U':
-        ending_grid = movementUp(starting_grid)
+        # Copy to not change starting_grid when changing temp_grid
+        temp_grid = movementUp(starting_grid.copy())
 
         # Check that there is a movement possible
-        if ending_grid.all() != starting_grid.all():
-            starting_grid = ending_grid
-            starting_grid = addRandomToGrid(starting_grid)
+        if (temp_grid==starting_grid).all():
+            pass
+        else:
+            starting_grid = addRandomToGrid(temp_grid)
 
     elif direction == 'D':
-        ending_grid = movementDown(starting_grid)
+        temp_grid = movementDown(starting_grid.copy())
 
-        if ending_grid.all() != starting_grid.all():
-            starting_grid = ending_grid
-            starting_grid = addRandomToGrid(starting_grid)
+        if (temp_grid==starting_grid).all():
+            pass
+        else:
+            starting_grid = addRandomToGrid(temp_grid)
 
     elif direction == 'L':
-        ending_grid = movementLeft(starting_grid)
+        temp_grid = movementLeft(starting_grid.copy())
 
-        if ending_grid.all() != starting_grid.all():
-            starting_grid = ending_grid
-            starting_grid = addRandomToGrid(starting_grid)
+        if (temp_grid==starting_grid).all():
+            pass
+        else:
+            starting_grid = addRandomToGrid(temp_grid)
 
     elif direction == 'R':
-        ending_grid = movementRight(starting_grid)
+        # temp_grid = starting_grid.copy()
+        temp_grid = movementRight(starting_grid.copy())
 
-        if ending_grid.all() != starting_grid.all():
-            starting_grid = ending_grid
-            starting_grid = addRandomToGrid(starting_grid)
+        if (temp_grid==starting_grid).all():
+            pass
+        else:
+            starting_grid = addRandomToGrid(temp_grid)
 
     else:
         break
