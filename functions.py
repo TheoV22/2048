@@ -4,11 +4,11 @@ import random
 # ================================ #
 #        Grid generation           #
 # ================================ #
-starting_numbers = [0, 2, 4]
-starting_grid = np.random.choice(starting_numbers, 16, p=[0.8, 0.15, 0.05]).reshape(4,4)
+#starting_numbers = [0, 2, 4]
+#starting_grid = np.random.choice(starting_numbers, 16, p=[0.8, 0.15, 0.05]).reshape(4,4)
 
-starting_grid[0:1,:] # --> lines
-starting_grid[:,0:1] # --> Columns
+#starting_grid[0:1,:] # --> lines
+#starting_grid[:,0:1] # --> Columns
 
 #starting_grid = np.random.randint(0, 5, (4,4))
 #starting_grid[starting_grid == 3] = 0
@@ -21,8 +21,6 @@ starting_grid[:,0:1] # --> Columns
 # ================================ #
 
 def addRandomToGrid(starting_grid):
-
-    print('Replacing a random 0')
 
     number_to_add = random.choice((2,2,4))
     counter = 0
@@ -44,7 +42,8 @@ def addRandomToGrid(starting_grid):
                     starting_grid[row_number][column_number] = number_to_add
                     counter += 1
                 break
-
+        
+    print('Ending grid: \n', starting_grid)
     return starting_grid
 
 
@@ -82,10 +81,7 @@ def movementDown(starting_grid):
         # print('Final Column: \n',test_column) 
         starting_grid[:,c:c+1] = column
 
-    ending_grid = addRandomToGrid(starting_grid)
-    print('Ending grid: \n', ending_grid)
-
-    return ending_grid
+    return starting_grid
 
 
 def movementUp(starting_grid):
@@ -118,10 +114,7 @@ def movementUp(starting_grid):
         # print('Final Column: \n',test_column) 
         starting_grid[:,c:c+1] = column
 
-    ending_grid = addRandomToGrid(starting_grid)
-    print('Ending grid: \n', ending_grid)
-
-    return ending_grid
+    return starting_grid
 
 
 def movementRight(starting_grid):
@@ -151,10 +144,7 @@ def movementRight(starting_grid):
                     row[j] = row[j-1]
                     row[j-1] = 0
 
-    ending_grid = addRandomToGrid(starting_grid)
-    print('Ending grid: \n', ending_grid)
-
-    return ending_grid
+    return starting_grid
 
 
 def movementLeft(starting_grid):
@@ -184,10 +174,7 @@ def movementLeft(starting_grid):
                     row[j] = row[j+1]
                     row[j+1] = 0
 
-    ending_grid = addRandomToGrid(starting_grid)
-    print('Ending grid: \n', ending_grid)
-
-    return ending_grid
+    return starting_grid
 
 #movementLeft(starting_grid)
 #movementRight(starting_grid)
