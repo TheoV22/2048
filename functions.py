@@ -2,21 +2,6 @@ import numpy as np
 import random
 
 # ================================ #
-#        Grid generation           #
-# ================================ #
-#starting_numbers = [0, 2, 4]
-#starting_grid = np.random.choice(starting_numbers, 16, p=[0.8, 0.15, 0.05]).reshape(4,4)
-
-#starting_grid[0:1,:] # --> lines
-#starting_grid[:,0:1] # --> Columns
-
-#starting_grid = np.random.randint(0, 5, (4,4))
-#starting_grid[starting_grid == 3] = 0
-#starting_grid[starting_grid == 1] = 0
-
-
-
-# ================================ #
 #     Replace one 0 by random      #
 # ================================ #
 
@@ -44,7 +29,7 @@ def addRandomToGrid(starting_grid):
                 break
         
     print('Ending grid: \n', starting_grid)
-    
+
     return starting_grid
 
 
@@ -176,8 +161,3 @@ def movementLeft(starting_grid):
                     row[j+1] = 0
 
     return starting_grid
-
-#movementLeft(starting_grid)
-#movementRight(starting_grid)
-#movementUp(starting_grid)
-#movementDown(starting_grid)
