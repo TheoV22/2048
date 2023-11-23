@@ -2,8 +2,6 @@ import tkinter as tk
 import numpy as np
 from main import *
 
-# Try with pygame ?
-
 # Fonction pour mettre à jour les données et afficher un nouveau tableau
 def update_data_right(starting_grid):
     new_data = movementRight(starting_grid.copy())
