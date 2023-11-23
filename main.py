@@ -4,6 +4,7 @@ starting_numbers = [0, 2, 4]
 starting_grid = np.random.choice(starting_numbers, 16, p=[0.8, 0.15, 0.05]).reshape(4,4)
 print("Grid created: \n", starting_grid)
 
+# Insert the lost condition !
 while True:
 
     direction = input('Which direction to move ? Select between U, D, L, R \n')
