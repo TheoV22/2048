@@ -62,8 +62,6 @@ def addRandomToGrid(starting_grid):
         position = random.choice(zero_positions)
         number_to_add = random.choice([2, 2, 4])
         starting_grid[position[0]][position[1]] = number_to_add
-
-        print('Ending grid: \n', starting_grid)
     
     return starting_grid
 
@@ -79,8 +77,6 @@ def movementDown(starting_grid):
     out: numpy array
     """
 
-    print('Starting grid: \n', starting_grid)
-
     for c in range(0, 4):
 
             column = starting_grid[:,c:c+1] 
@@ -90,8 +86,6 @@ def movementDown(starting_grid):
             column = reorder_up(column)
 
             starting_grid[:,c:c+1] = column
-
-    print('Ending grid:\n', starting_grid)
 
     return starting_grid
 
@@ -103,8 +97,6 @@ def movementUp(starting_grid):
     out: numpy array
     """
 
-    print('Starting grid: \n', starting_grid)
-
     for c in range(0, 4):
             
             column = starting_grid[:,c:c+1]
@@ -114,8 +106,6 @@ def movementUp(starting_grid):
             column = reorder_down(column)
 
             starting_grid[:,c:c+1] = column
-
-    print('Ending grid:\n', starting_grid)
 
     return starting_grid
 
@@ -127,8 +117,6 @@ def movementRight(starting_grid):
     out: numpy array
     """
     
-    print('Starting grid: \n', starting_grid)
-
     for c in range(0, 4):
             
             row = starting_grid[c:c+1,:].reshape(4,1)
@@ -149,8 +137,6 @@ def movementLeft(starting_grid):
     out: numpy array
     """
 
-    print('Starting grid: \n', starting_grid)
-
     for c in range(0, 4):
             
             row = starting_grid[c:c+1,:].reshape(4,1)
@@ -164,7 +150,17 @@ def movementLeft(starting_grid):
     return starting_grid
 
 
+def check(grid):
+     grid2 = movementDown(grid.copy())
+     grid2 = movementUp(grid2)
+     grid2 = movementLeft(grid2)
+     grid2 = movementRight(grid2)
 
+     if (grid2 == grid).all():
+          return 0
+     
+     else:
+          return 1
 
 
 
