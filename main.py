@@ -52,8 +52,7 @@ while True:
 
 
         else:
-            print('Not valid movement, quitting')
-            break
+            print('Not valid movement')
 
     print('Actual Grid:\n', starting_grid)
 
