@@ -41,31 +41,35 @@ def movementDown(starting_grid):
 
     print('Starting grid: \n', starting_grid)
 
+    # On fait la boucle 3 fois, car on peut potentiellement avoir 3 additions à faire en un mouvement
+    # for _ in range(0,3):
+
     for c in range(0, 4):
-        column = starting_grid[:,c:c+1]
+            column = starting_grid[:,c:c+1]
 
-        # Reorder the numbers to have all the 0 up:
-        for _ in range(0,3):
-            for j in range(3,0,-1):
-                if column[j] == 0:
-                    column[j] = column[j-1]
-                    column[j-1] = 0
+            # Reorder the numbers to have all the 0 up:
+            for _ in range(0,3):
+                for j in range(3,0,-1):
+                    if column[j] == 0:
+                        column[j] = column[j-1]
+                        column[j-1] = 0
 
-        # Add numbers that are the same
-        for j in range(2,-1,-1): # We need to start from the bottom
-            if column[j] == column[j+1]:
-                column[j+1] += column[j+1]
-                column[j] = 0
+            # Add numbers that are the same
+            for j in range(2,-1,-1): # We need to start from the bottom
+                if column[j] == column[j+1]:
+                    column[j+1] += column[j+1]
+                    column[j] = 0
 
-        # Reorder the numbers to have all the 0 up:
-        for _ in range(0,3):
-            for j in range(3,0,-1):
-                if column[j] == 0:
-                    column[j] = column[j-1]
-                    column[j-1] = 0
+            # Reorder the numbers to have all the 0 up:
+            for _ in range(0,3):
+                for j in range(3,0,-1):
+                    if column[j] == 0:
+                        column[j] = column[j-1]
+                        column[j-1] = 0
 
-        # print('Final Column: \n',test_column) 
-        starting_grid[:,c:c+1] = column
+            # print('Final Column: \n',test_column) 
+            starting_grid[:,c:c+1] = column
+    print('Ending grid:\n', starting_grid)
 
     return starting_grid
 
@@ -74,31 +78,35 @@ def movementUp(starting_grid):
 
     print('Starting grid: \n', starting_grid)
 
+    # On fait la boucle 3 fois, car on peut potentiellement avoir 3 additions à faire en un mouvement
+    # for _ in range(0,3):
+
     for c in range(0, 4):
-        column = starting_grid[:,c:c+1]
+            column = starting_grid[:,c:c+1]
 
-        # Reorder the numbers to have all the 0 down:
-        for _ in range(0,3):
-            for j in range(0,3,1):
-                if column[j] == 0:
-                    column[j] = column[j+1]
+            # Reorder the numbers to have all the 0 down:
+            for _ in range(0,3):
+                for j in range(0,3,1):
+                    if column[j] == 0:
+                        column[j] = column[j+1]
+                        column[j+1] = 0
+
+            # Add numbers that are the same
+            for j in range(0,3,1): # We need to start from the top
+                if column[j] == column[j+1]:
+                    column[j] += column[j]
                     column[j+1] = 0
 
-        # Add numbers that are the same
-        for j in range(0,2,1): # We need to start from the top
-            if column[j] == column[j+1]:
-                column[j] += column[j]
-                column[j+1] = 0
+            # Reorder the numbers to have all the 0 down:
+            for _ in range(0,3):
+                for j in range(0,3,1):
+                    if column[j] == 0:
+                        column[j] = column[j+1]
+                        column[j+1] = 0
 
-        # Reorder the numbers to have all the 0 down:
-        for _ in range(0,3):
-            for j in range(0,3,1):
-                if column[j] == 0:
-                    column[j] = column[j+1]
-                    column[j+1] = 0
-
-        # print('Final Column: \n',test_column) 
-        starting_grid[:,c:c+1] = column
+            # print('Final Column: \n',test_column) 
+            starting_grid[:,c:c+1] = column
+    print('Ending grid:\n', starting_grid)
 
     return starting_grid
 
@@ -107,28 +115,31 @@ def movementRight(starting_grid):
 
     print('Starting grid: \n', starting_grid)
 
+    # On fait la boucle 3 fois, car on peut potentiellement avoir 3 additions à faire en un mouvement
+    # for _ in range(0,3):
+
     for c in range(0, 4):
-        row = starting_grid[c:c+1,:].reshape(4,1)
+            row = starting_grid[c:c+1,:].reshape(4,1)
 
-        # Reorder the numbers to have all the 0 up:
-        for _ in range(0,3):
-            for j in range(3,0,-1):
-                if row[j] == 0:
-                    row[j] = row[j-1]
-                    row[j-1] = 0
+            # Reorder the numbers to have all the 0 up:
+            for _ in range(0,3):
+                for j in range(3,0,-1):
+                    if row[j] == 0:
+                        row[j] = row[j-1]
+                        row[j-1] = 0
 
-        # Add numbers that are the same
-        for j in range(2,-1,-1): # We need to start from the bottom
-            if row[j] == row[j+1]:
-                row[j+1] += row[j+1]
-                row[j] = 0
+            # Add numbers that are the same
+            for j in range(2,-1,-1): # We need to start from the bottom
+                if row[j] == row[j+1]:
+                    row[j+1] += row[j+1]
+                    row[j] = 0
 
-        # Reorder the numbers to have all the 0 up:
-        for _ in range(0,3):
-            for j in range(3,0,-1):
-                if row[j] == 0:
-                    row[j] = row[j-1]
-                    row[j-1] = 0
+            # Reorder the numbers to have all the 0 up:
+            for _ in range(0,3):
+                for j in range(3,0,-1):
+                    if row[j] == 0:
+                        row[j] = row[j-1]
+                        row[j-1] = 0
 
     return starting_grid
 
@@ -136,28 +147,30 @@ def movementRight(starting_grid):
 def movementLeft(starting_grid):
 
     print('Starting grid: \n', starting_grid)
+    # On fait la boucle 3 fois, car on peut potentiellement avoir 3 additions à faire en un mouvement
+    # for _ in range(0,3):
 
     for c in range(0, 4):
-        row = starting_grid[c:c+1,:].reshape(4,1)
+            row = starting_grid[c:c+1,:].reshape(4,1)
 
-    # Reorder the numbers to have all the 0 down:
-        for _ in range(0,3):
-            for j in range(0,3,1):
-                if row[j] == 0:
-                    row[j] = row[j+1]
+            # Reorder the numbers to have all the 0 down:
+            for _ in range(0,3):
+                for j in range(0,3,1):
+                    if row[j] == 0:
+                        row[j] = row[j+1]
+                        row[j+1] = 0
+
+            # Add numbers that are the same
+            for j in range(0,3,1): # We need to start from the top
+                if row[j] == row[j+1]:
+                    row[j] += row[j]
                     row[j+1] = 0
 
-        # Add numbers that are the same
-        for j in range(0,2,1): # We need to start from the top
-            if row[j] == row[j+1]:
-                row[j] += row[j]
-                row[j+1] = 0
-
-        # Reorder the numbers to have all the 0 down:
-        for _ in range(0,3):
-            for j in range(0,3,1):
-                if row[j] == 0:
-                    row[j] = row[j+1]
-                    row[j+1] = 0
+            # Reorder the numbers to have all the 0 down:
+            for _ in range(0,3):
+                for j in range(0,3,1):
+                    if row[j] == 0:
+                        row[j] = row[j+1]
+                        row[j+1] = 0
 
     return starting_grid
