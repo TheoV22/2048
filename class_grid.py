@@ -1,9 +1,12 @@
 import numpy as np
 import random
 
+
 class Grid(object):
+
     column = None
     row = None
+
     def __init__(self, array, starting_numbers, size, numbers_probability):
         self.array = array if array is not None else self.create(starting_numbers, size, numbers_probability)
 

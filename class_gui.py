@@ -2,48 +2,47 @@ import numpy as np
 import pygame
 from pygame.locals import *
 
-from constants import CP
+from constants import *
 # from functions import *
 import class_grid as grid
 from button import *
+import menu
 
 
 class Gui(object):
 
-    ''' put all those constants in constants.py '''
-    N = 4
-    W = 600
-    H = 600
-    SPACING = 10
-    title = "2048"
-    font_type = "Comic Sans MS"
-    font_size = 30
-    game_over_font_size = 60
-    game_over_text = "Game Over"
-    replay_text = "replay"
-
     def __init__(self, grid_):
         pygame.init()
-        pygame.display.set_caption(self.title)
+        pygame.display.set_caption(GUI["title"])
 
         pygame.font.init()
-        self.game_font = pygame.font.SysFont(self.font_type, self.font_size)
+        self.game_font = pygame.font.SysFont(GUI["font_type"], GUI["grid_font_size"])
 
-        self.screen = pygame.display.set_mode((self.W, self.H))
+        self.screen = pygame.display.set_mode((GUI["W"], GUI["H"]))
 
         self.grid_ = grid_
+
+        self.button_replay = Button(GUI["W"] * GUI["replay"]["button"]["pos"][0],
+                                    GUI["H"] * GUI["replay"]["button"]["pos"][1],
+                                    GUI["replay"]["button"]["width"],
+                                    GUI["replay"]["button"]["height"],
+                                    GUI["replay"]["button"]["color"],
+                                    GUI["replay"]["text"],
+                                    GUI["replay"]["font_size"],
+                                    GUI["replay"]["button"]["hover_color"]
+                                    )
 
     def draw_game(self):
         self.screen.fill(CP["back"])
 
-        for i in range(self.N):
-            for j in range(self.N):
+        for i in range(GUI["N"]):
+            for j in range(GUI["N"]):
                 n = self.grid_.array[i][j]
 
-                rect_x = j * self.W // self.N + self.SPACING
-                rect_y = i * self.H // self.N + self.SPACING
-                rect_w = self.W // self.N - 2 * self.SPACING
-                rect_h = self.H // self.N - 2 * self.SPACING
+                rect_x = j * GUI["W"] // GUI["N"] + GUI["SPACING"]
+                rect_y = i * GUI["H"] // GUI["N"] + GUI["SPACING"]
+                rect_w = GUI["W"] // GUI["N"] - 2 * GUI["SPACING"]
+                rect_h = GUI["H"] // GUI["N"] - 2 * GUI["SPACING"]
 
                 pygame.draw.rect(
                     self.screen,
@@ -62,27 +61,21 @@ class Gui(object):
         transparency = 25
         self.screen.fill((transparency, transparency, transparency), special_flags=pygame.BLEND_RGB_ADD)
 
-        game_over_font = pygame.font.SysFont(self.font_type, self.game_over_font_size, bold=True)
-        game_over_surface = game_over_font.render(self.game_over_text,True, (0,0,0))
+        game_over_font = pygame.font.SysFont(GUI["font_type"], GUI["game_over"]["font_size"], bold=True)
+        game_over_surface = game_over_font.render(GUI["game_over"]["text"],True, (0,0,0))
         game_over_rect = game_over_surface.get_rect(
-            center=(self.W / 2, self.H / 2)
+            center=(GUI["W"] * GUI["game_over"]["pos"][0], GUI["H"] * GUI["game_over"]["pos"][1])
         )
         self.screen.blit(game_over_surface, game_over_rect)
 
-        #pygame.draw.rect(self.screen, (0,0,0), pygame.Rect(300, 500, 100, 40))
-        #replay_font = pygame.font.SysFont(self.font_type, self.font_size)
-        #replay_surface = replay_font.render(self.replay_text, True, (255,255,255))
-        #replay_rect = replay_surface.get_rect(center=(300+50, 500+20))
-        #self.screen.blit(replay_surface, replay_rect)
-
-
+        self.button_replay.draw(self.screen)
 
     def wait_for_key(self):
         while True:
             for event in pygame.event.get():
                 if event.type == QUIT:
                     return "q"
-                if event.type == KEYDOWN:
+                elif event.type == KEYDOWN:
                     if event.key == K_UP:
                         return "u"
                     elif event.key == K_RIGHT:
@@ -93,6 +86,11 @@ class Gui(object):
                         return "d"
                     elif event.key == K_q or event.key == K_ESCAPE:
                         return "q"
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    if self.button_replay.rect.collidepoint(event.pos):
+                        return "replay"
+                elif event.type == pygame.MOUSEMOTION:
+                    return self.button_replay.update_color(event.pos)
 
     def running(self):
         while True:
@@ -100,7 +98,7 @@ class Gui(object):
             pygame.display.flip()
             if self.grid_.is_game_over():
                 print("game over")
-                break
+                return self.game_over()
             key = self.wait_for_key()
             temp_grid = grid.Grid(self.grid_.array.copy(), None, None, None)
             if key == 'q':
@@ -120,26 +118,14 @@ class Gui(object):
         while True:
             self.draw_game()
             self.draw_game_over_screen()
-            #button = Button(300, 500, 100, 40, (0, 0, 0), self.replay_text)
-            #button.draw(self.screen)
-
             pygame.display.flip()
 
             key = self.wait_for_key()
             if key == 'q':
                 break
-
-            """
-            for event in pygame.event.get():
-                if event.type == QUIT:
-                    return
-                elif event.type == pygame.MOUSEBUTTONDOWN:
-                    if button.rect.collidepoint(event.pos):
-                        return 
-            """
+            elif key == "replay":
+                m = menu.Menu()
+                return m.launch_game()
 
     def main(self):
         self.running()
-        self.game_over()
-
-

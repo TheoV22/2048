@@ -2,7 +2,12 @@
 #from gui import *
 import class_grid as grid
 import class_gui as c_gui
+import menu
 
+m = menu.Menu()
+m.launch_game()
+
+'''
 starting_numbers = [0, 2, 4]
 size = (4,4)
 probability = [0.8, 0.15, 0.05]
@@ -15,3 +20,4 @@ while starting_grid.is_game_over():
 
 gui = c_gui.Gui(starting_grid)
 gui.main()
+'''
