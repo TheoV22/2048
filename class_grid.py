@@ -11,16 +11,31 @@ class Grid(object):
         self.array = array if array is not None else self.create(starting_numbers, size, numbers_probability)
 
     def create(self, starting_numbers, size, numbers_probability):
+        """
+        in : array, tuple, array
+        Check that there is at least one move possible, i.e. that the game is not over.
+        out: boolean
+        """
         return np.random.choice(starting_numbers, size, p=numbers_probability)
 
     def is_game_over(self):
-
+        """
+        in : no parameter
+        Check that there is at least one move possible, i.e. that the game is not over.
+        out: boolean
+        """
         copy_ = Grid(self.array.copy(),None,None,None)
         copy_.movement_down().movement_up().movement_left().movement_right().add_random_to_grid()
 
         return self.is_grid_equal(copy_.array)
+        # check that the copied grid, with all the possible moves applied to it, is not the same as the initial grid
 
     def is_grid_equal(self, grid):
+        """
+        in : numpy array
+        Check that the grid in parameter is equal to this instance's grid
+        out: boolean
+        """
         return np.array_equal(self.array, grid)
 
     def reorder_up(self, column):

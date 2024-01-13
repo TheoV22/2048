@@ -1,9 +1,5 @@
-import numpy as np
-import pygame
 from pygame.locals import *
 
-from constants import *
-# from functions import *
 import class_grid as grid
 from button import *
 import menu
@@ -12,6 +8,13 @@ import menu
 class Gui(object):
 
     def __init__(self, grid_):
+
+        """
+        in: Grid object
+        Initialize the GUI object with the provided grid.
+        out: None
+        """
+
         pygame.init()
         pygame.display.set_caption(GUI["title"])
 
@@ -33,6 +36,11 @@ class Gui(object):
                                     )
 
     def draw_game(self):
+        """
+        in: None
+        Draw the current state of the grid.
+        out: None
+        """
         self.screen.fill(CP["back"])
 
         for i in range(GUI["N"]):
@@ -58,6 +66,12 @@ class Gui(object):
                     self.screen.blit(text_surface, text_rect)
 
     def draw_game_over_screen(self):
+        """
+        in: None
+        Draw the game over screen on the GUI.
+        out: None
+        """
+
         transparency = 25
         self.screen.fill((transparency, transparency, transparency), special_flags=pygame.BLEND_RGB_ADD)
 
@@ -71,6 +85,12 @@ class Gui(object):
         self.button_replay.draw(self.screen)
 
     def wait_for_key(self):
+        """
+        in: None
+        Wait for a mouse motion, a key or button press and returns the corresponding action.
+        out: string
+        """
+
         while True:
             for event in pygame.event.get():
                 if event.type == QUIT:
@@ -93,6 +113,12 @@ class Gui(object):
                     return self.button_replay.update_color(event.pos)
 
     def running(self):
+        """
+        in: None
+        Manage the main game loop, handling user input and updating the game state.
+        out: None, or game_over() method
+        """
+
         while True:
             self.draw_game()
             pygame.display.flip()
@@ -115,6 +141,12 @@ class Gui(object):
                 self.grid_.add_random_to_grid()
 
     def game_over(self):
+        """
+        in: None
+        Manage the game over screen, handling user input.
+        out: None (exit the game), or Menu.launch_game() (replay)
+        """
+
         while True:
             self.draw_game()
             self.draw_game_over_screen()
@@ -128,4 +160,9 @@ class Gui(object):
                 return m.launch_game()
 
     def main(self):
+        """
+        in: None
+        Main method to start and run the game.
+        out: None
+        """
         self.running()

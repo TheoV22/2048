@@ -13,9 +13,14 @@ class Menu(object):
         pass
 
     def launch_game(self):
+        """
+        in: None
+        Initialise a Grid object and launch the game
+        out: None
+        """
         starting_grid = grid.Grid(None,self.starting_numbers,self.size,self.probability)
 
-        while starting_grid.is_game_over():
+        while starting_grid.is_game_over():  # in case the random grid is only composed of zeros
             print("generating new grid")
             starting_grid = grid.Grid(None,self.starting_numbers,self.size,self.probability)
 
