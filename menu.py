@@ -13,11 +13,14 @@ class Menu(object):
         pass
 
     def launch_game(self):
-        starting_grid = grid.Grid(None,self.starting_numbers,self.size,self.probability)
+        print(self.starting_numbers)
+        print(self.size)
+        print(self.probability)
+        starting_grid = grid.Grid(starting_numbers=self.starting_numbers,size=self.size,probability=self.probability)
 
         while starting_grid.is_game_over():
             print("generating new grid")
-            starting_grid = grid.Grid(None,self.starting_numbers,self.size,self.probability)
+            starting_grid = grid.Grid(starting_numbers=self.starting_numbers,size=self.size,probability=self.probability)
 
         gui = c_gui.Gui(starting_grid)
         gui.main()

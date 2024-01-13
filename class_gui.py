@@ -100,7 +100,7 @@ class Gui(object):
                 print("game over")
                 return self.game_over()
             key = self.wait_for_key()
-            temp_grid = grid.Grid(self.grid_.array.copy(), None, None, None)
+            temp_grid = grid.Grid(array=self.grid_.array.copy())
             if key == 'q':
                 break
             elif key == 'u':

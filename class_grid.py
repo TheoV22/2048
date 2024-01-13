@@ -6,16 +6,25 @@ class Grid(object):
 
     column = None
     row = None
-
+    '''
     def __init__(self, array, starting_numbers, size, numbers_probability):
         self.array = array if array is not None else self.create(starting_numbers, size, numbers_probability)
+    '''
+    def __init__(self, **kwargs):
+        print('yes') if 'array' in kwargs else print('no')
+        self.array = kwargs.get('array') if 'array' in kwargs \
+            else self.create(kwargs.get('starting_numbers'), kwargs.get('size'), kwargs.get('numbers_probability'))
+        #print(self.array)
+        #self.array = array if array is not None else self.create(starting_numbers, size, numbers_probability)
 
     def create(self, starting_numbers, size, numbers_probability):
-        return np.random.choice(starting_numbers, size, p=numbers_probability)
+        test = np.random.choice(starting_numbers, size, p=numbers_probability)
+        print(test)
+        return test
 
     def is_game_over(self):
 
-        copy_ = Grid(self.array.copy(),None,None,None)
+        copy_ = Grid(array=self.array.copy())
         copy_.movement_down().movement_up().movement_left().movement_right().add_random_to_grid()
 
         return self.is_grid_equal(copy_.array)
